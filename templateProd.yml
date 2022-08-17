@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  genesisTokenProd:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      AutoPublishAlias: live
+      Handler: index.handler
+      Runtime: nodejs12.x
+      CodeUri: .
+      Description: ''
+      MemorySize: 192
+      Timeout: 120
+      Role: 'arn:aws:iam::502875221486:role/genesis-web-token-prod'
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-0d44e2b27481f38c1
+        SubnetIds:
+          - subnet-00bc6293ff4652e4c
+          - subnet-0907dcf29a278dbdc
+      Environment:
+        Variables:
+          Function: genesis-token-prod
+          Project: Genesis
+          development: production
+      Tracing: Active
